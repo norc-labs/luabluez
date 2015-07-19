@@ -6,7 +6,33 @@ lua wrapper of [bluez](http://www.bluez.org) apis (bluetooth stack)
 The Bluez stack supports a variety of APIs; luabluez currently only
 wraps (part of) the HCI API.
 
-# getting started
+See below for info on getting started with bluez on Edison.
+
+## code and apis
+
+The bluez stack involves several apis:
+
+* [dbus](http://www.freedesktop.org/wiki/Software/dbus/) - standard Linux IPC mechanism
+* hci - Host Controller Interface, defined by Bluetooth
+* sdp - Service Discovery Protocol, defined by Bluetooth
+* etc.
+
+There is no user-level documentation explaining the APIs, but once you
+learn how to use bluetoothctl, hciconfig, hcitool, etc. you can
+examine the source code to see how the APIs work.  The source tree
+looks something like the following.
+
+* attrib/ - code for gatttool
+* client/ - code for the bluetoothctl tool (note there is no bluetoothctl.c file)
+* lib/ - lower-level api implementations - hci, sdp, etc.
+* src/ - implementations for the dbus api?
+* unit/ - various C programs for unit testing
+
+The preferred application-level API seems to be dbus, but as of July
+2015 that API seems to be not quite complete.  It is documented in the
+docs/ subdir.
+
+# getting started with bluetooth on the Edison
 
 Bluez comes with several tools that can be used to configure, test,
 and generally explore Bluetooth (classic and le) from the command
@@ -68,7 +94,7 @@ The Bluetooth Core spec contains a long table listing acronyms.  Some relevant o
  to previous versions.  For example, you can find instructions on how
  to use `bluez-simple-agent`; this was replaced in bluez5 by
  `bluetoothctl`.  Bluez5 was released in late 2012 (see the
- [Intro and Porting Guide](http://www.bluez.org/bluez-5-api-introduction-and-porting-guide/),
+ [Intro and Porting Guide](http://www.bluez.org/bluez-5-api-introduction-and-porting-guide/))
  so check the date on any documentation you find online.
 
 ## tools
@@ -143,30 +169,6 @@ Vendor-specific tools in tools/:
 * hex2hcd - Broadcom Bluetooth firmware converter
 * nokfw - Nokia Bluetooth firmware analyzer
 * seq2bseq - Intel Bluetooth firmware converter
-
-## code and apis
-
-The bluez stack involves several apis:
-
-* [dbus](http://www.freedesktop.org/wiki/Software/dbus/) - standard Linux IPC mechanism
-* hci - Host Controller Interface, defined by Bluetooth
-* sdp - Service Discovery Protocol, defined by Bluetooth
-* etc.
-
-There is no user-level documentation explaining the APIs, but once you
-learn how to use bluetoothctl, hciconfig, hcitool, etc. you can
-examine the source code to see how the APIs work.  The source tree
-looks something like the following.
-
-* attrib/ - code for gatttool
-* client/ - code for the bluetoothctl tool (note there is no bluetoothctl.c file)
-* lib/ - lower-level api implementations - hci, sdp, etc.
-* src/ - implementations for the dbus api?
-* unit/ - various C programs for unit testing
-
-The preferred application-level API seems to be dbus, but as of July
-2015 that API seems to be not quite complete.  It is documented in the
-docs/ subdir.
 
 # Resources
 
