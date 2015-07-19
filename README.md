@@ -18,14 +18,15 @@ The bluez stack involves several apis:
 * etc.
 
 There is no user-level documentation explaining the APIs, but once you
-learn how to use bluetoothctl, hciconfig, hcitool, etc. you can
-examine the source code to see how the APIs work.  The source tree
-looks something like the following.
+learn how to use bluetoothctl, hciconfig, hcitool, etc. (see below)
+you can examine the source code to see how the APIs work.  The source
+tree looks something like the following.
 
-* attrib/ - code for gatttool
-* client/ - code for the bluetoothctl tool (note there is no bluetoothctl.c file)
+* attrib/ - implementation of the attribute database (e.g. ATT and GATT); code for gatttool
+* client/ - code for the bluetoothctl tool, which will show you how to use the dbus API (note there is no bluetoothctl.c file)
 * lib/ - lower-level api implementations - hci, sdp, etc.
 * src/ - implementations for the dbus api?
+* tools - the source for e.g. hciconfig, hcitool, etc. will show you how to use the hci interface
 * unit/ - various C programs for unit testing
 
 The preferred application-level API seems to be dbus, but as of July
