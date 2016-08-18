@@ -1,14 +1,26 @@
-# luabluez
+= luabluez
 lua wrapper of [bluez](http://www.bluez.org) apis (bluetooth stack)
 
-# overview
+== status
+
+Barely even got started before I got pulled in another direction.
+Below are notes from my exploration of bluez.  The little bit of
+source code is just a start, but to be honest I don't even recall if I
+ever actually ran it.  I hope someday to return to this and finish,
+but that probably won't happen in the near future.
+
+NOTE: The original motivation for this was to have a lua bluetooth sdk
+on the Intel Edison, so that's the way the code is written.
+
+
+= overview
 
 The Bluez stack supports a variety of APIs; luabluez currently only
 wraps (part of) the HCI API.
 
 See below for info on getting started with bluez on Edison.
 
-## code and apis
+== code and apis
 
 The bluez stack involves several apis:
 
@@ -26,14 +38,15 @@ tree looks something like the following.
 * client/ - code for the bluetoothctl tool, which will show you how to use the dbus API (note there is no bluetoothctl.c file)
 * lib/ - lower-level api implementations - hci, sdp, etc.
 * src/ - implementations for the dbus api?
-* tools - the source for e.g. hciconfig, hcitool, etc. will show you how to use the hci interface
+* test/ - python test scripts; they use the dbus api
+* tools/ - the source for e.g. hciconfig, hcitool, etc. will show you how to use the hci interface
 * unit/ - various C programs for unit testing
 
 The preferred application-level API seems to be dbus, but as of July
 2015 that API seems to be not quite complete.  It is documented in the
 docs/ subdir.
 
-# getting started with bluetooth on the Edison
+== getting started with bluetooth on the Edison
 
 Bluez comes with several tools that can be used to configure, test,
 and generally explore Bluetooth (classic and le) from the command
@@ -76,7 +89,7 @@ alternative is `$ hcitool scan`
 Bluetooth LE scan: `$ hcitool lescan`
 
 
-## acronyms
+== acronyms
 
 The Bluetooth Core spec contains a long table listing acronyms.  Some relevant ones:
 
@@ -88,7 +101,7 @@ The Bluetooth Core spec contains a long table listing acronyms.  Some relevant o
 * RFCOMM
 * SDP - Service Discovery Protocol
 
-# bluez
+== bluez
 
 *CAVEAT*: bluez 5 involved major breaking changes.  Lots of
  documentation on the use of bluez available on the web only applies
@@ -98,7 +111,7 @@ The Bluetooth Core spec contains a long table listing acronyms.  Some relevant o
  [Intro and Porting Guide](http://www.bluez.org/bluez-5-api-introduction-and-porting-guide/))
  so check the date on any documentation you find online.
 
-## tools
+== tools
 
 The stack includes several useful tools that you can use to get started:
 
@@ -171,11 +184,11 @@ Vendor-specific tools in tools/:
 * nokfw - Nokia Bluetooth firmware analyzer
 * seq2bseq - Intel Bluetooth firmware converter
 
-# Resources
+== Resources
 
-## Bluetooth
+== Bluetooth
 * [Bluetooth `Adopted' Specifications](https://www.bluetooth.org/en-us/specification/adopted-specifications?_ga=1.178563111.220673070.1436421945) - you'll want Core Version 4.2 or later
 
-## Intel
+== Intel
 * [Intel® Edison Board Getting Started with Bluetooth](https://software.intel.com/en-us/articles/intel-edison-board-getting-started-with-bluetooth)
 * [Edison Bluetooth Guide](https://software.intel.com/en-us/articles/intel-edison-bluetooth-guide)

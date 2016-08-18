@@ -12,20 +12,21 @@ LUAINC= $(LUA)/include
 LUALIB= $(LUA)/lib
 LUABIN= $(LUA)/bin
 
-# MRAAINC= /opt/poky-edison/1.7.2/sysroots//core2-32-poky-linux/usr/include
+BLUEZINC= /opt/poky-edison/1.7.2/sysroots//core2-32-poky-linux/usr/include
 
 # probably no need to change anything below here
 # CC= gcc
-CFLAGS= -std=c99 $(INCS) $(WARN) -O2 $G
+#CFLAGS= -std=c99 $(INCS) $(WARN) -O2 $G
+CFLAGS= $(INCS) $(WARN) -O2 $G
 WARN= -pedantic -Wall -Wextra
-INCS= -I$(LUAINC) -I$(MRAAINC)
-#MAKESO= $(CC) -shared
-MAKESO= $(CC) -undefined dynamic_lookup
+INCS= -I$(LUAINC) -I$(BLUEZINC)
+MAKESO= $(CC) -shared -lbluetooth
+#MAKESO= $(CC) -undefined dynamic_lookup
 
-MYNAME= luamraa
+MYNAME= luahci
 MYLIB= l$(MYNAME)
 T= $(MYNAME).so
-OBJS= luamraa.o wrap.o
+OBJS= luahci.o # luabluez.o
 TEST= test.lua
 
 all:	test
